@@ -1,0 +1,23 @@
+{
+  "name": "to-do-app",
+  "version": "0.1.0",
+  "description": "To-Do App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmandaErnar/to-do-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmandaErnar/to-do-app/issues"
+  },
+  "homepage": "https://github.com/AmandaErnar/to-do-app#readme",
+  "devDependencies": {
+    "electron": "^11.0.4"
+  }
+}
