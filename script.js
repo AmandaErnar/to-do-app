@@ -15,9 +15,22 @@ function emptyList() {
     alert("You have emptied the list. (pretend it worked)");
 }
 function saveList() {
-    alert("Karen took the kids");
-}
+    var toDos = [];
 
+    for (var i = 0; i < toDoList.children.length; i++) {
+        var toDo = toDoList.children.item(i);
+
+        var toDoInfo = {
+            "task": toDo.innerText,
+            "completed": toDo.classList.contains("completed")
+        };
+
+        toDos.push(toDoInfo);
+
+    }
+
+    localStorage.setItem("toDos", JSON.stringify(toDos));
+}
 function newToDoItem(itemText, completed) {
     var toDoItem = document.createElement("li");
     var toDoText = document.createTextNode(itemText);
@@ -34,6 +47,38 @@ function addToDoItem() {
     var itemText = toDoEntryBox.value;
     newToDoItem(itemText, false);
 }
+function toggleToDoItemState() {
+    if (this.classList.contains("completed")) {
+        this.classList.remove("completed");
+    } else {
+        this.classList.add("completed");
+    }
+}
+function clearCompletedToDoItems() {
+    var completedItems = toDoList.getElementsByClassName("completed");
+
+    while (completedItems.length > 0) {
+        completedItems.item(0).remove();
+    }
+}
+function emptyList() {
+    var toDoItems = toDoList.children;
+    while (toDoItems.length > 0) {
+        toDoItems.item(0).remove();
+    }
+}
+function loadList() {
+    if (localStorage.getItem("toDos") != null) {
+        var toDos = JSON.parse(localStorage.getItem("toDos"));
+
+        for (var i = 0; i < toDos.length; i++) {
+            var toDo = toDos[i];
+            newToDoItem(toDo.task, toDo.completed);
+        }
+    }
+}
+
+loadList();
 
 clearButton.addEventListener("click", clearCompletedToDoItems);
 emptyButton.addEventListener("click", emptyList);
